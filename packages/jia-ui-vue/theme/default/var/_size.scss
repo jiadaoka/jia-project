@@ -1,0 +1,48 @@
+// 大小
+@use 'sass:map';
+$size-types: default, small, mini;
+
+$paddings: () !default;
+$paddings: map.deep-merge(
+    (
+        'default': 8px,
+        'small': 6px,
+        'mini': 4px,
+    ),
+    $paddings
+);
+
+$heights: () !default;
+$heights: map.deep-merge(
+    (
+        'default': 32px,
+        'small': 28px,
+        'mini': 24px,
+    ),
+    $heights
+);
+
+$radius: () !default;
+$radius: map.deep-merge(
+    (
+        'circle': 16px,
+        'base': 4px,
+        'mini': 2px,
+        '': 0px,
+    ),
+    $radius
+);
+
+// 文字大小
+$text-types: large, medium, base, mini;
+
+$text-sizes: () !default;
+$text-sizes: map.deep-merge(
+    (
+        'large': 18px,
+        'medium': 16px,
+        'base': 14px,
+        'mini': 12px,
+    ),
+    $text-sizes
+);

@@ -1,0 +1,75 @@
+@use 'sass:map';
+@use '../common/mixins' as *;
+@use '../var/index' as *;
+@use '../common/functions' as *;
+
+@include b(button) {
+    #{getCssVarName(button,text-color)}: getCssVar(text-color, primary);
+    #{getCssVarName(button,border-color)}: getCssVar(border-color);
+    #{getCssVarName(button,bg-color)}: getCssVar(bg-color);
+
+    #{getCssVarName(button,text-color,hover)}: getCssVar(color, primary);
+    #{getCssVarName(button,border-color,hover)}: getCssVar(color, primary);
+    #{getCssVarName(button,bg-color,hover)}: getCssVar(fill-color, blank);
+
+    @each $type in ('primary', 'success', 'warning', 'info', 'danger') {
+        @include m($type) {
+            #{getCssVarName(button,text-color)}: getCssVar(color, $type);
+            #{getCssVarName(button,border-color)}: getCssVar(color, $type);
+            #{getCssVarName(button,bg-color)}: getCssVar(bg-color);
+
+            #{getCssVarName(button,text-color,hover)}: getCssVar(color, white);
+            #{getCssVarName(button,border-color,hover)}: getCssVar(color, $type);
+            #{getCssVarName(button,bg-color,hover)}: getCssVar(color, $type);
+        }
+    }
+
+    #{getCssVarName(button,padding)}: map.get($paddings, default);
+    #{getCssVarName(button,height)}: map.get($heights, default);
+
+    @each $size in (small, mini) {
+        @include m($size) {
+            #{getCssVarName(button,padding)}: map.get($paddings, $size);
+            #{getCssVarName(button,height)}: map.get($heights, $size);
+        }
+    }
+}
+
+@include b(button) {
+    cursor: pointer;
+
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    line-height: 1;
+    font-size: getCssVar(font-size, base);
+    outline: none;
+
+    padding: getCssVar(button, padding);
+    height: getCssVar(button, height);
+    border-radius: getCssVar(border-radius, 'base');
+
+    color: getCssVar(button, text-color);
+    border: 1px solid getCssVar(button, border-color);
+    background-color: getCssVar(button, bg-color);
+
+    &:hover,
+    &:focus,
+    &:active {
+        color: getCssVar(button, text-color, hover);
+        border-color: getCssVar(button, border-color, hover);
+        background-color: getCssVar(button, bg-color, hover);
+        outline: none;
+    }
+
+    &:focus-visible {
+        outline: 2px solid getCssVar('button', 'outline-color');
+        outline-offset: 1px;
+    }
+
+    > span {
+        display: inline-flex;
+        align-items: center;
+    }
+}

@@ -1,0 +1,27 @@
+@use 'common/functions' as *;
+@use 'common/mixins' as *;
+@use 'var/index' as var;
+@use 'sass:map';
+
+html {
+    font-size: 'Microsoft YaHei', '微软雅黑', 'PingFang SC', 'Hiragino Sans GB', Arial, sans-serif;
+}
+
+:root {
+    #{getCssVarName(color,white)}: var.$color-white;
+    #{getCssVarName(color,black)}: var.$color-black;
+    @each $type in var.$color-types {
+        #{getCssVarName(color,$type)}: map.get(var.$colors, $type, 'base');
+    }
+
+    @include set-component-css-var('font-size', var.$text-sizes);
+    @include set-component-css-var('text-color', var.$text-color);
+    @include set-component-css-var('bg-color', var.$bg-color);
+    @include set-component-css-var('border-color', var.$border-color);
+    @include set-component-css-var('fill-color', var.$fill-color);
+    @include set-component-css-var('border-radius', var.$radius);
+}
+
+:root {
+    --width: 100px;
+}

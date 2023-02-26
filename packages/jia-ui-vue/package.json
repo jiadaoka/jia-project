@@ -1,0 +1,40 @@
+{
+    "name": "jia-ui-vue",
+    "version": "0.0.0-dev",
+    "description": "",
+    "keywords": [
+        "component library",
+        "ui",
+        "vue"
+    ],
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vue-tsc && vite build",
+        "preview": "vite preview",
+        "preinstall": "npx -y only-allow pnpm"
+    },
+    "main": "./dist/jia-ui-vue.js",
+    "module": "./dist/jia-ui-vue.js",
+    "exports": {
+        ".": {
+            "import": "./dist/jia-ui-vue.js",
+            "require": "./dist/jia-ui-vue.umd.cjs"
+        }
+    },
+    "style": "./dist/index.css",
+    "peerDependencies": {
+        "vue": "^3.2.47"
+    },
+    "dependencies": {
+        "jia-utils": "workspace:*"
+    },
+    "devDependencies": {
+        "vite": "^3.2.3"
+    },
+    "browserslist": [
+        "> 1%",
+        "not ie 11",
+        "not op_mini all"
+    ]
+}

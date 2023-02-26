@@ -1,0 +1,38 @@
+@use '../var/index' as *;
+
+@function joinVarName($list) {
+    $name: '--' + $namespace;
+
+    @each $a in $list {
+        $name: $name + $common-separator + $a;
+    }
+
+    @return $name;
+}
+
+@function getCssVarName($list...) {
+    @return joinVarName($list);
+}
+
+@function getCssVar($list...) {
+    @return var(#{joinVarName($list)});
+}
+
+@function getCssVarWithDefault($default, $list...) {
+    @return var(#{joinVarName($list)}, #{$default});
+}
+
+// bem('block', 'element', 'modifier') => 'el-block__element--modifier'
+@function bem($block, $element: '', $modifier: '') {
+    $name: $namespace + $common-separator + $block;
+
+    @if $element != '' {
+        $name: $name + $element-separator + $element;
+    }
+
+    @if $modifier != '' {
+        $name: $name + $modifier-separator + $modifier;
+    }
+
+    @return $name;
+}

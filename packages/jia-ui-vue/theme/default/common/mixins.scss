@@ -1,0 +1,55 @@
+@use './functions' as *;
+@use '../var/index' as *;
+
+// BEM
+@mixin b($block) {
+    $B: bem($block) !global;
+
+    .#{$B} {
+        @content;
+    }
+}
+
+@mixin e($element) {
+    $selector: &; // 嵌套父级
+    $currentSelector: '';
+
+    // 用于创建多个
+    @each $unit in $element {
+        $currentSelector: #{$currentSelector + $selector + $element-separator + $unit + ','};
+    }
+
+    @at-root {
+        #{$selector} #{$currentSelector} {
+            @content;
+        }
+    }
+}
+
+@mixin m($modifier) {
+    $selector: &; // 嵌套父级
+    $currentSelector: '';
+
+    // 用于创建多个
+    @each $unit in $modifier {
+        $currentSelector: #{$currentSelector + $selector + $modifier-separator + $unit + ','};
+    }
+
+    // 放弃当前的嵌套层级
+    @at-root {
+        #{$selector}#{$currentSelector} {
+            @content;
+        }
+    }
+}
+
+// set all css var for component by map
+@mixin set-component-css-var($name, $variables) {
+    @each $attribute, $value in $variables {
+        @if $attribute == 'default' or $attribute == '' {
+            #{getCssVarName($name)}: #{$value};
+        } @else {
+            #{getCssVarName($name, $attribute)}: #{$value};
+        }
+    }
+}
