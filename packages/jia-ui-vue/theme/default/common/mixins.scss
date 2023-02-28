@@ -13,14 +13,15 @@
 @mixin e($element) {
     $selector: &; // 嵌套父级
     $currentSelector: '';
-
     // 用于创建多个
     @each $unit in $element {
-        $currentSelector: #{$currentSelector + $selector + $element-separator + $unit + ','};
+        $currentSelector: #{$selector + ' ' + $currentSelector + $selector + $element-separator + $unit + ','};
     }
 
+    @debug $currentSelector;
+
     @at-root {
-        #{$selector} #{$currentSelector} {
+        #{$currentSelector} {
             @content;
         }
     }
