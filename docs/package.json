@@ -1,0 +1,28 @@
+{
+    "name": "docs",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "vitepress dev",
+        "build": "vitepress build",
+        "serve": "vitepress serve"
+    },
+    "keywords": [],
+    "type": "module",
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "@panda-jia/vitepress-demo": "0.1.1-1",
+        "sass": "^1.56.1",
+        "unplugin-vue-define-options": "^1.0.0",
+        "vitepress": "1.0.0-alpha.47",
+        "vue": "^3.2.47"
+    },
+    "devDependencies": {
+        "@algolia/client-search": ">= 4.9.1 < 6",
+        "@types/markdown-it": "^12.2.3",
+        "@vitejs/plugin-vue-jsx": "^2.1.1",
+        "vite": "^4.0.4"
+    }
+}
