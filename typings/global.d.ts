@@ -1,6 +1,6 @@
 import type { Plugin, DefineComponent } from 'vue'
-import type { CssNameInstance } from '@packages/jia-utils/typescript'
-import internal from 'stream'
+import type { cssNameInstance } from '@packages/jia-utils/typescript'
+import type { registerLock } from '@ui-vue/common/symbol'
 
 declare global {
     type SFCWithInstall<T> = T & Plugin
@@ -11,5 +11,11 @@ declare global {
 declare module 'vue' {
     interface ComponentCustomProperties {
         $cssName: CssNameInstance
+    }
+}
+
+declare module '@vue/runtime-core' {
+    export interface App {
+        [registerLock]?: boolean
     }
 }

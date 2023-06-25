@@ -1,4 +1,4 @@
-import vueComponents from './menu/vueComponents'
+import uiVue from './menu/ui-vue'
 const nav = [
     {
         text: '笔记',
@@ -7,8 +7,8 @@ const nav = [
     },
     {
         text: 'Vue 组件',
-        link: '/pages/vueComponents/virtualizedList',
-        activeMatch: '^/pages/vueComponents',
+        link: '/pages/ui-vue/virtualizedList',
+        activeMatch: '^/pages/ui-vue',
     },
 ]
 
@@ -18,7 +18,7 @@ const footer = {
 }
 
 const sidebar = {
-    '/pages/vueComponents': vueComponents,
+    '/pages/ui-vue': uiVue,
 }
 
 export { nav, footer, sidebar }

@@ -1,14 +1,5 @@
-import type { App } from 'vue'
-import componentList from './components/list'
-export * from './components/map'
-export const version = '0.0.0-dev'
+import { version, installer } from '@ui-vue/common/installer.ts'
+export * from '@ui-vue/components/list.ts'
 
-const installer = {
-    version,
-    install(app: App) {
-        componentList.forEach((component) => app.use(component))
-    },
-}
-
-export { componentList }
+export { version }
 export default installer

@@ -1,13 +1,15 @@
 import type { Theme } from 'vitepress/dist/client'
 import DefaultTheme from 'vitepress/theme'
-import demoComponent from '@panda-jia/vitepress-demo/component'
-import jiaUiVue from '@packages/jia-ui-vue/index'
+import demoComponent, { beforeMountSymbol } from '@panda-jia/vitepress-demo/component'
+import jiaUiVue from '@panda-jia/ui-vue'
 // import './public.scss'
 
 export default {
     ...DefaultTheme,
-    enhanceApp({ app }) {
+    enhanceApp({ app, router, siteData }) {
+        app.provide(beforeMountSymbol, (subApp) => {
+            subApp.use(jiaUiVue)
+        })
         app.component('demo', demoComponent)
-        app.use(jiaUiVue)
     },
 } as Theme

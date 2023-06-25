@@ -10,7 +10,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, nextTick } from 'vue'
+import { ref, nextTick } from 'vue'
 const props = defineProps(['total'])
 
 let runTime = ref(0) // 结束时间

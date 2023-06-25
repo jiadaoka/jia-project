@@ -68,7 +68,7 @@
         outline-offset: 1px;
     }
 
-    > span {
+    @include e(text) {
         display: inline-flex;
         align-items: center;
     }

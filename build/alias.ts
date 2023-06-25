@@ -16,6 +16,10 @@ export async function initAlias(): Promise<Alias[]> {
             find: '@packages',
             replacement: resolve(__dirname, '../packages'),
         },
+        {
+            find: '@ui-vue',
+            replacement: resolve(__dirname, '../packages/jia-ui-vue'),
+        },
     ]
 
     return alias

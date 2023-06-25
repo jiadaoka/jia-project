@@ -1,4 +1,4 @@
-import { withInstall } from 'jia-utils'
+import { withInstall } from '@panda-jia/utils'
 import space from './src/space'
 
 const jiaButton = withInstall(space)

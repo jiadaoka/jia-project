@@ -1,4 +1,4 @@
-import { CssName } from 'jia-utils'
+import { CssName } from '@panda-jia/utils'
 
 interface ConfigInterface {
     namespace: string

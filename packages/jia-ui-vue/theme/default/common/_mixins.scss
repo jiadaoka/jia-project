@@ -44,6 +44,14 @@
     }
 }
 
+@mixin when($state) {
+    @at-root {
+        &.#{$state-prefix + $state} {
+            @content;
+        }
+    }
+}
+
 // set all css var for component by map
 @mixin set-component-css-var($name, $variables) {
     @each $attribute, $value in $variables {

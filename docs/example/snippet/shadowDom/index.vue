@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, defineCustomElement } from 'vue'
-import { button } from '@packages/jia-ui-vue/index'
+import { button } from '@panda-jia/ui-vue'
 
 const host = ref<Element>()
 const host2 = ref<Element>()

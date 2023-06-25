@@ -1,5 +1,5 @@
 import { defineComponent, renderSlot } from 'vue'
-import globalConfig from '../../../common/index'
+import globalConfig from '@ui-vue/common/config.ts'
 const cssName = globalConfig.cssName!.createBlock('space')
 
 export default defineComponent({

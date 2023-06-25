@@ -1,12 +1,13 @@
 import { defineConfig } from 'vite'
-import DefineOptions from 'unplugin-vue-define-options/vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
 import { initAlias } from './build/index'
 
 // https://vitejs.dev/config/
-export default defineConfig(async () => {
+export default defineConfig(async ({ command, mode }) => {
+    const alias = await initAlias()
+
     return {
         server: {
             port: 8080,
@@ -21,10 +22,9 @@ export default defineConfig(async () => {
                 },
             }),
             vueJsx(),
-            DefineOptions(),
         ],
         resolve: {
-            alias: [...(await initAlias())],
+            alias,
         },
     }
 })

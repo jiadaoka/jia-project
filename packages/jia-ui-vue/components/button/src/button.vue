@@ -1,6 +1,7 @@
 <template>
     <button :class="[cssName.base(), cssName.m(size), cssName.m(type), disabled && cssName.is('disabled'), text && cssName.is('text')]">
-        <span>
+        <i v-if="icon" :class="[cssName.e('icon'), icon]"></i>
+        <span :class="[cssName.e('text')]">
             <slot />
         </span>
     </button>
@@ -8,7 +9,7 @@
 
 <script setup lang="ts">
 import { toRefs } from 'vue'
-import globalConfig from '../../../common/index'
+import globalConfig from '@ui-vue/common/config.ts'
 
 defineOptions({
     name: 'JiaButton',
@@ -21,10 +22,11 @@ interface Props {
     type?: PropsTypes
     disabled?: Boolean
     text?: Boolean
+    icon?: String
 }
 
 const props = defineProps<Props>()
-const { size, type, disabled, text } = toRefs(props)
+const { size, type, disabled, text, icon } = toRefs(props)
 
 const cssName = globalConfig.cssName!.createBlock('button')
 </script>

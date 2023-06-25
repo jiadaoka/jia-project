@@ -1,8 +1,5 @@
 import { defineConfig } from 'vite'
-import DefineOptions from 'unplugin-vue-define-options/vite'
 import { resolve } from 'path'
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
 import dts from 'vite-plugin-dts'
 
 import { initAlias } from '../../build/index'
@@ -13,25 +10,23 @@ export default defineConfig(async () => {
 
     return {
         plugins: [
-            vue(),
-            vueJsx(),
-            DefineOptions(),
             dts({
                 root: '../../',
-                entryRoot: './packages/jia-ui-vue/',
+                entryRoot: './packages/jia-utils/src',
                 tsConfigFilePath: './tsconfig.packages.json',
-                include: ['packages/jia-ui-vue/**/*', 'typings/**/*'],
-                outputDir: './packages/jia-ui-vue/dist/types',
+                include: ['packages/jia-utils/src/**/*', 'typings/**/*'],
+                outputDir: './packages/jia-utils/dist/types',
             }),
         ],
         build: {
             lib: {
                 // Could also be a dictionary or array of multiple entry points
-                entry: resolve(__dirname, 'index.ts'),
+                entry: resolve(__dirname, 'src/index.ts'),
+                name: 'utils',
             },
             rollupOptions: {
                 // 确保外部化处理那些你不想打包进库的依赖
-                external: ['vue', '@panda-jia/utils'],
+                external: ['vue'],
                 output: [
                     {
                         format: 'es',

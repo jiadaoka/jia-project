@@ -17,8 +17,14 @@ export default {
     markdown: {
         config(md: MarkdownIt) {
             md.use(componentTransform, {
-                style: ['.abc{width:100px}'],
-                cssUrl: ['./../../packages/jia-ui-vue/theme/default/index.scss'],
+                style: [
+                    `
+                .jia-space + .jia-space{
+                    margin-top:10px;
+                }
+                `,
+                ],
+                cssUrl: ['@panda-jia/ui-vue/dist/theme/default/index.css', 'remixicon/fonts/remixicon.css'],
             })
         },
     },
