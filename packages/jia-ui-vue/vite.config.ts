@@ -1,3 +1,4 @@
+import type { UserConfig } from 'vite'
 import { defineConfig } from 'vite'
 import DefineOptions from 'unplugin-vue-define-options/vite'
 import { resolve } from 'path'
@@ -8,22 +9,25 @@ import dts from 'vite-plugin-dts'
 import { initAlias } from '../../build/index'
 
 // https://vitejs.dev/config/
-export default defineConfig(async () => {
+export default defineConfig(async ({ mode }) => {
     const alias = await initAlias()
 
-    return {
-        plugins: [
-            vue(),
-            vueJsx(),
-            DefineOptions(),
+    const plugins = [vue(), vueJsx(), DefineOptions()]
+
+    if (mode === 'production') {
+        plugins.push(
             dts({
                 root: '../../',
                 entryRoot: './packages/jia-ui-vue/',
                 tsConfigFilePath: './tsconfig.packages.json',
                 include: ['packages/jia-ui-vue/**/*', 'typings/**/*'],
                 outputDir: './packages/jia-ui-vue/dist/types',
-            }),
-        ],
+            })
+        )
+    }
+
+    const config: UserConfig = {
+        plugins,
         build: {
             lib: {
                 // Could also be a dictionary or array of multiple entry points
@@ -49,9 +53,15 @@ export default defineConfig(async () => {
                     },
                 ],
             },
+            watch: {
+                buildDelay: 1000,
+                exclude: ['node_modules/**', 'dist/**', 'theme/**'],
+            },
         },
         resolve: {
             alias,
         },
     }
+
+    return config
 })

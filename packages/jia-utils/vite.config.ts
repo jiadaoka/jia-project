@@ -5,19 +5,25 @@ import dts from 'vite-plugin-dts'
 import { initAlias } from '../../build/index'
 
 // https://vitejs.dev/config/
-export default defineConfig(async () => {
+export default defineConfig(async ({ mode }) => {
     const alias = await initAlias()
 
-    return {
-        plugins: [
+    const plugins = []
+
+    if (mode === 'production') {
+        plugins.push(
             dts({
                 root: '../../',
-                entryRoot: './packages/jia-utils/src',
+                entryRoot: './packages/jia-ui-vue/',
                 tsConfigFilePath: './tsconfig.packages.json',
-                include: ['packages/jia-utils/src/**/*', 'typings/**/*'],
-                outputDir: './packages/jia-utils/dist/types',
-            }),
-        ],
+                include: ['packages/jia-ui-vue/**/*', 'typings/**/*'],
+                outputDir: './packages/jia-ui-vue/dist/types',
+            })
+        )
+    }
+
+    return {
+        plugins,
         build: {
             lib: {
                 // Could also be a dictionary or array of multiple entry points

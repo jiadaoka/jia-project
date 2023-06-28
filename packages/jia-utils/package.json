@@ -8,7 +8,7 @@
         "utils"
     ],
     "scripts": {
-        "dev": "vite",
+        "dev": "vite build --watch --mode dev",
         "build": "tsc && vite build",
         "preinstall": "npx -y only-allow pnpm"
     },

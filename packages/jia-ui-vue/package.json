@@ -9,18 +9,21 @@
     ],
     "type": "module",
     "scripts": {
-        "dev": "vite",
+        "dev": "gulp dev",
+        "dev:style": "gulp watchStyle",
+        "dev:components": "vite build --watch --mode dev",
         "build": "gulp",
         "build:components": "vue-tsc -p ../../tsconfig.packages.json && vite build",
         "preview": "vite preview",
         "preinstall": "npx -y only-allow pnpm"
     },
-    "main": "./dist/jia-ui-vue.js",
-    "module": "./dist/jia-ui-vue.js",
+    "main": "./dist/lib/index.js",
+    "module": "./dist/es/index.js",
+    "types": "./dist/types/index.d.ts",
     "exports": {
         ".": {
-            "import": "./dist/jia-ui-vue.js",
-            "require": "./dist/jia-ui-vue.umd.cjs"
+            "import": "./dist/es/index.js",
+            "require": "./dist/lib/index.js"
         }
     },
     "style": "./dist/index.css",
