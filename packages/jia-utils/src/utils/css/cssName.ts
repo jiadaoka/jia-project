@@ -1,17 +1,55 @@
 import type { App } from 'vue'
 
+interface CssConfig {
+    commonSeparator?: string
+    elementSeparator?: string
+    modifierSeparator?: string
+    statePrefix?: string
+}
+
+/**
+ * 初始化实例参数
+ */
 class CssName {
     #namespace = ''
 
-    /**
-     * @param namespace
-     */
-    constructor(namespace: string = '') {
+    #commonSeparator = '-'
+    #elementSeparator = '__'
+    #modifierSeparator = '--'
+    #statePrefix = 'is-'
+    #cssVarPrefix = '--'
+
+    constructor(namespace: string = '', config: CssConfig = {}) {
         this.#namespace = namespace
+
+        if (typeof config.commonSeparator === 'string') {
+            this.#commonSeparator = config.commonSeparator
+        }
+
+        if (typeof config.elementSeparator === 'string') {
+            this.#elementSeparator = config.elementSeparator
+        }
+
+        if (typeof config.modifierSeparator === 'string') {
+            this.#modifierSeparator = config.modifierSeparator
+        }
+
+        if (typeof config.statePrefix === 'string') {
+            this.#statePrefix = config.statePrefix
+        }
     }
 
     get namespace() {
         return this.#namespace
+    }
+
+    get config(): CssConfig {
+        return {
+            commonSeparator: this.#commonSeparator,
+            elementSeparator: this.#elementSeparator,
+            modifierSeparator: this.#modifierSeparator,
+            statePrefix: this.#statePrefix,
+        }
     }
 
     install(app: App) {
@@ -33,17 +71,17 @@ class CssName {
 
         if (n.length) {
             if (this.#namespace) {
-                n[0] = `${this.#namespace}-${n[0]}`
+                n[0] = `${this.#namespace}${this.#commonSeparator}${n[0]}`
             }
 
             if (element) {
                 n.push(element)
             }
 
-            name = n.join('__')
+            name = n.join(this.#elementSeparator)
 
             if (modifier) {
-                name += `--${modifier}`
+                name += `${this.#modifierSeparator}${modifier}`
             }
         }
 
@@ -75,8 +113,9 @@ class CssName {
                 throw new Error('CssName>createBlock>is：入参为空')
             }
 
-            return 'is-' + status
+            return this.#statePrefix + status
         }
+        const getCssVarName = (...list: string[]) => this.getCssVarName(...n, ...list)
 
         return {
             base,
@@ -86,7 +125,12 @@ class CssName {
             m,
             em,
             is,
+            getCssVarName,
         }
+    }
+
+    getCssVarName(...list: string[]) {
+        return `${this.#cssVarPrefix}${this.#namespace}${this.#commonSeparator}${list.join(this.#commonSeparator)}`
     }
 }
 
